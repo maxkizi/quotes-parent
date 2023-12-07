@@ -1,0 +1,44 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet author="maxkizi" id="1-init-schema">
+        <createTable remarks="Table of users" tableName="user">
+            <column name="id" type="bigserial" autoIncrement="true" remarks="Id">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="login" type="text" remarks="Login">
+                <constraints nullable="false" uniqueConstraintName="uq_login"/>
+            </column>
+            <column name="created_at" type="timestamp" remarks="Creation date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp" remarks="Edition date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable remarks="Table of quotes" tableName="quote">
+            <column name="id" type="bigserial" autoIncrement="true" remarks="Id">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="content" type="text" remarks="Login">
+                <constraints nullable="false"/>
+            </column>
+            <column name="score" type="bigint" remarks="Quote's score(rating)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint" remarks="User reference column">
+                <constraints foreignKeyName="fk_user_id" references="user(id)"/>
+            </column>
+            <column name="created_at" type="timestamp" remarks="Creation date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp" remarks="Edition date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
