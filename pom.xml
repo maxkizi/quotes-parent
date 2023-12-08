@@ -28,6 +28,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <lombok.mupstruct.binding.version>0.2.0</lombok.mupstruct.binding.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <jjwt.version>0.9.1</jjwt.version>
+        <guava.version>28.1-jre</guava.version>
     </properties>
 
     <dependencyManagement>
@@ -36,6 +38,16 @@
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
                 <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

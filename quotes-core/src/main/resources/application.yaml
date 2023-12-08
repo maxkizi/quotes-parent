@@ -1,12 +1,21 @@
+server:
+  port: 8080
+
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password: password
+    url: jdbc:postgresql://localhost:5432/quotes_core
+    #    driverClassName: org.h2.Driver
+    username: postgres
+    password: postgres
   liquibase:
     change-log: classpath:db/changelog.xml
   jpa:
     open-in-view: false
-    database-platform: org.hibernate.dialect.H2Dialect
+#    database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
+    hibernate:
+      ddl-auto: none
+jwt:
+  secretKey: secreteeffffffffffffffffffffffffffffffffffffffffffaf
+security:
+  enabled: true

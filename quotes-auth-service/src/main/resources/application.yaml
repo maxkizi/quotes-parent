@@ -1,0 +1,19 @@
+server:
+  port: 9090
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/quotes_auth
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: postgres
+  liquibase:
+    change-log: classpath:db/changelog.xml
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+
+jwt:
+  expiration: 50
+  secret: secreteeffffffffffffffffffffffffffffffffffffffffffaf

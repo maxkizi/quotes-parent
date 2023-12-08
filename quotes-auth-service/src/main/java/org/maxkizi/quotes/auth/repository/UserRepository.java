@@ -1,6 +1,6 @@
-package org.maxkizi.quotes.core.repository;
+package org.maxkizi.quotes.auth.repository;
 
-import org.maxkizi.quotes.core.model.User;
+import org.maxkizi.quotes.auth.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

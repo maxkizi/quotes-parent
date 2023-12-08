@@ -10,22 +10,23 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="login" type="text" remarks="Login">
-                <constraints nullable="false" uniqueConstraintName="uq_login"/>
-            </column>
-        </createTable>
-
-        <createTable remarks="Table of quotes" tableName="quote">
-            <column name="id" type="bigserial" autoIncrement="true" remarks="Id">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="content" type="text" remarks="Login">
                 <constraints nullable="false"/>
             </column>
-            <column name="score" type="bigint" remarks="Quote's score(rating)">
+            <column name="name" type="text" remarks="User's name"/>
+            <column name="password" type="text" remarks="Login">
                 <constraints nullable="false"/>
             </column>
-            <column name="user_id" type="bigint" remarks="User reference column">
-                <constraints foreignKeyName="fk_user_id" references="users(id)"/>
+            <column name="is_account_non_expired" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_account_non_locked" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_credentials_non_expired" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_enabled" type="boolean">
+                <constraints nullable="false"/>
             </column>
             <column name="created_at" type="timestamp" remarks="Creation date">
                 <constraints nullable="false"/>

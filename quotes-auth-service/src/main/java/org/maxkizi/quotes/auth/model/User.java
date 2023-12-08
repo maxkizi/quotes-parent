@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.maxkizi.quotes.common.model.BaseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -21,11 +22,13 @@ import java.util.Collections;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table
-public class User implements UserDetails {
+@Table(name = "users")
+public class User extends BaseEntity implements UserDetails {
     @Id
     @Column(name = "login")
     private String login;
+    @Column(name = "name")
+    private String name;
     @Column(name = "password")
     private String password;
     @Column(name = "is_account_non_expired")

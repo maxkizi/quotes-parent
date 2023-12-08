@@ -10,7 +10,7 @@ public interface QuoteService {
 
     Quote getRandom();
 
-    Quote save(Quote quote);
+    Quote save(String userLogin, String quoteContent);
 
     Quote updateContent(long id, String content);
 
