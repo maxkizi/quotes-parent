@@ -10,9 +10,10 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="login" type="text" remarks="Login">
-                <constraints nullable="false" uniqueConstraintName="uq_login"/>
+                <constraints nullable="false"/>
             </column>
         </createTable>
+        <addUniqueConstraint tableName="users" columnNames="login" constraintName="uq_login"/>
 
         <createTable remarks="Table of quotes" tableName="quote">
             <column name="id" type="bigserial" autoIncrement="true" remarks="Id">
@@ -21,11 +22,9 @@
             <column name="content" type="text" remarks="Login">
                 <constraints nullable="false"/>
             </column>
-            <column name="score" type="bigint" remarks="Quote's score(rating)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="user_id" type="bigint" remarks="User reference column">
-                <constraints foreignKeyName="fk_user_id" references="users(id)"/>
+            <column name="user_id" type="bigint" remarks="Reference on user">
+                <constraints nullable="false"
+                             foreignKeyName="fk_quote_user_id" references="users(id)"/>
             </column>
             <column name="created_at" type="timestamp" remarks="Creation date">
                 <constraints nullable="false"/>
@@ -34,5 +33,21 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+
+        <createTable tableName="votes" remarks="votes table">
+            <column name="user_id" type="bigint" remarks="Reference on user">
+                <constraints nullable="false"
+                             foreignKeyName="fk_votes_user_id" references="users(id)"/>
+            </column>
+            <column name="quote_id" type="bigint" remarks="Reference on quote">
+                <constraints nullable="false"
+                             foreignKeyName="fk_votes_quote_id" references="quote(id)"/>
+            </column>
+            <column name="int_value" type="integer" remarks="upvote=1 downvote=-1">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="votes" columnNames="user_id, quote_id"
+                       constraintName="uq_user_id_quote_id"/>
     </changeSet>
 </databaseChangeLog>

@@ -17,3 +17,6 @@ spring:
 jwt:
   expiration: 50
   secret: secreteeffffffffffffffffffffffffffffffffffffffffffaf
+
+kafka:
+  bootstrap: localhost:29092

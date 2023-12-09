@@ -1,7 +1,7 @@
 package org.maxkizi.quotes.auth.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.maxkizi.quotes.auth.exception.UserNotFoundException;
+import org.maxkizi.quotes.common.exception.UserNotFoundException;
 import org.maxkizi.quotes.auth.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

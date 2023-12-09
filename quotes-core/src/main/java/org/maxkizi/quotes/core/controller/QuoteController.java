@@ -1,7 +1,8 @@
 package org.maxkizi.quotes.core.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.maxkizi.quotes.core.dto.QuoteDto;
+import org.maxkizi.quotes.core.dto.PrincipalDto;
+import org.maxkizi.quotes.core.dto.response.QuoteDto;
 import org.maxkizi.quotes.core.enumeration.RatingType;
 import org.maxkizi.quotes.core.mapper.QuoteMapper;
 import org.maxkizi.quotes.core.service.QuoteService;
@@ -39,7 +40,7 @@ public class QuoteController {
 
     @PostMapping(QUOTES)
     public QuoteDto create(@RequestBody String quoteContent) {
-        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        PrincipalDto principal = (PrincipalDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return quoteMapper.toDto(quoteService.save(principal, quoteContent));
     }
 
@@ -49,23 +50,27 @@ public class QuoteController {
     }
 
     @PatchMapping(QUOTE_BY_ID)
-    public QuoteDto updateQuote(@PathVariable(name = "id") long id,
+    public QuoteDto updateQuote(@PathVariable(name = "id") long quoteId,
                                 @RequestBody String content) {
-        return quoteMapper.toDto(quoteService.updateContent(id, content));
+        PrincipalDto principal = (PrincipalDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return quoteMapper.toDto(quoteService.updateContent(quoteId, content, principal));
     }
 
     @DeleteMapping(QUOTE_BY_ID)
-    public void deleteQuote(@PathVariable(name = "id") long id) {
-        quoteService.delete(id);
+    public void deleteQuote(@PathVariable(name = "id") long quoteId) {
+        PrincipalDto principal = (PrincipalDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        quoteService.delete(quoteId, principal);
     }
 
     @PatchMapping(QUOTE_UPVOTE)
-    public QuoteDto upvoteQuote(@PathVariable(name = "id") long id) {
-        return quoteMapper.toDto(quoteService.upvote(id));
+    public void upvoteQuote(@PathVariable(name = "id") long id) {
+        PrincipalDto principal = (PrincipalDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        quoteService.upvote(principal, id);
     }
 
     @PatchMapping(QUOTE_DOWNVOTE)
-    public QuoteDto downQuote(@PathVariable(name = "id") long id) {
-        return quoteMapper.toDto(quoteService.downvote(id));
+    public void downQuote(@PathVariable(name = "id") long id) {
+        PrincipalDto principal = (PrincipalDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        quoteService.downvote(principal, id);
     }
 }

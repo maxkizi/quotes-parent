@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
 import org.maxkizi.quotes.common.model.BaseEntity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +17,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -35,6 +38,6 @@ public class Quote extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-    @Column(name = "score")
-    private Long score;
+    @OneToMany(mappedBy = "quote", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Vote> votes;
 }

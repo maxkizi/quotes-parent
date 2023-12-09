@@ -30,6 +30,7 @@
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <jjwt.version>0.9.1</jjwt.version>
         <guava.version>28.1-jre</guava.version>
+        <spring.kafka.version>2.9.7</spring.kafka.version>
     </properties>
 
     <dependencyManagement>
@@ -48,6 +49,11 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.kafka</groupId>
+                <artifactId>spring-kafka</artifactId>
+                <version>${spring.kafka.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

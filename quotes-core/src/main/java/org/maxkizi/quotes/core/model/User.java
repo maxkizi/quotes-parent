@@ -30,6 +30,6 @@ public class User {
     private Long id;
     @Column(name = "login")
     private String login;
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Quote> quotes;
 }

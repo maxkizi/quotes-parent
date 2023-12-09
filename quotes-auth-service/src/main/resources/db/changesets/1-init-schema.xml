@@ -35,5 +35,6 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+        <addUniqueConstraint tableName="users" columnNames="login" constraintName="uq_login"/>
     </changeSet>
 </databaseChangeLog>

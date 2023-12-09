@@ -1,22 +1,24 @@
 package org.maxkizi.quotes.core.service;
 
+import org.maxkizi.quotes.core.dto.PrincipalDto;
+import org.maxkizi.quotes.core.dto.projection.QuoteProjection;
 import org.maxkizi.quotes.core.enumeration.RatingType;
 import org.maxkizi.quotes.core.model.Quote;
 
 import java.util.List;
 
 public interface QuoteService {
-    List<Quote> findByRatingType(RatingType ratingType, int count);
+    List<QuoteProjection> findByRatingType(RatingType ratingType, int count);
 
-    Quote getRandom();
+    QuoteProjection getRandom();
 
-    Quote save(String userLogin, String quoteContent);
+    Quote save(PrincipalDto userLogin, String quoteContent);
 
-    Quote updateContent(long id, String content);
+    Quote updateContent(long quoteId, String content, PrincipalDto principalDto);
 
-    void delete(long id);
+    void delete(long quoteId, PrincipalDto principalDto);
 
-    Quote upvote(long id);
+    void upvote(PrincipalDto userLogin, long quoteId);
 
-    Quote downvote(long id);
+    void downvote(PrincipalDto userLogin, long quoteId);
 }

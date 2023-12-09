@@ -4,5 +4,5 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class Exceptions {
-    public static final String USER_NOT_FOUND_MESSAGE = "User not found";
+    public static final String USER_ALREADY_SIGNED_UP_MESSAGE = "User already signed up";
 }

@@ -4,18 +4,19 @@ server:
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/quotes_core
-    #    driverClassName: org.h2.Driver
+    driverClassName: org.postgresql.Driver
     username: postgres
     password: postgres
   liquibase:
     change-log: classpath:db/changelog.xml
   jpa:
     open-in-view: false
-#    database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
     hibernate:
       ddl-auto: none
 jwt:
   secretKey: secreteeffffffffffffffffffffffffffffffffffffffffffaf
-security:
-  enabled: true
+kafka:
+  bootstrap: localhost:29092
+  groupId: quote-core
+  userInfoTopic: user

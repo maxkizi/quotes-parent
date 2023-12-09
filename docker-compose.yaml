@@ -1,0 +1,21 @@
+services:
+  quotes_zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+  quotes_kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - quotes_zookeeper
+    ports:
+      - 29092:29092
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: 'quotes_zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://quotes_kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: '1'
+      KAFKA_MIN_INSYNC_REPLICAS: '1'
+    restart: always
