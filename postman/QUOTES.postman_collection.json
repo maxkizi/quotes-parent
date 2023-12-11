@@ -1,0 +1,342 @@
+{
+	"info": {
+		"_postman_id": "e20010ff-2804-4cb7-b2c6-88116c7d1d8a",
+		"name": "QUOTES",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16411279"
+	},
+	"item": [
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "actuatorHealthEndpoint",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/actuator",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"actuator"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\" : \"maxkizi\",\r\n    \"password\" : \"maxkizi\",\r\n    \"name\" : \"maxim\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/api/v1/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"v1",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "authenticate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\" : \"maxkizi\",\r\n    \"password\" : \"maxkizi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/api/v1/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"v1",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CORE",
+			"item": [
+				{
+					"name": "create quote",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXhraXppIiwiZXhwIjoxNzAyMzEyNjM3LCJpYXQiOjE3MDIzMDY2Mzd9.qpPH6V6tJNHvy0y2rct_b2GWJ-hyagKSyZrXRm9RURD0ph4YbXrpPOoXrD21xhDsU-2py8XOH9Dd4BFRs7wIZQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "maxkizi second quote"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/quotes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"quotes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upvote",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXhraXppIiwiZXhwIjoxNzAyMzEyNjM3LCJpYXQiOjE3MDIzMDY2Mzd9.qpPH6V6tJNHvy0y2rct_b2GWJ-hyagKSyZrXRm9RURD0ph4YbXrpPOoXrD21xhDsU-2py8XOH9Dd4BFRs7wIZQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/quote/1/upvote",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"quote",
+								"1",
+								"upvote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete quote",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXhraXppIiwiZXhwIjoxNzAyMzA5ODQ4LCJpYXQiOjE3MDIzMDM4NDh9.eRx-3VD2BK2lTWU05a3JpR6tWjl5rT0zlm5nOHosJmONAyyIY4NH0PjxZcnyh2ThjPqm94byvV12a2r32lDoPA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/quote/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"quote",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "downvote",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXhraXppIiwiZXhwIjoxNzAyMzEyNjM3LCJpYXQiOjE3MDIzMDY2Mzd9.qpPH6V6tJNHvy0y2rct_b2GWJ-hyagKSyZrXRm9RURD0ph4YbXrpPOoXrD21xhDsU-2py8XOH9Dd4BFRs7wIZQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "first"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/quote/1/downvote",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"quote",
+								"1",
+								"downvote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTop",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXNoIiwiZXhwIjoxNzAyMjk0MDQ4LCJpYXQiOjE3MDIyOTEwNDh9.5r4HntYKe_bElZ4qPk-cRwirc_c-v8EbLpZpq2-848DAqlZmeI9Ku8sg8C-pnRarvHrDC7RUXvsEhFzy3il5Lg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/quotes?ratingType=TOP",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"quotes"
+							],
+							"query": [
+								{
+									"key": "ratingType",
+									"value": "TOP"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getRandom",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXhraXppIiwiZXhwIjoxNzAyMzEyNjM3LCJpYXQiOjE3MDIzMDY2Mzd9.qpPH6V6tJNHvy0y2rct_b2GWJ-hyagKSyZrXRm9RURD0ph4YbXrpPOoXrD21xhDsU-2py8XOH9Dd4BFRs7wIZQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/quote/random",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"quote",
+								"random"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getWORSE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXNoIiwiZXhwIjoxNzAyMjk0MDQ4LCJpYXQiOjE3MDIyOTEwNDh9.5r4HntYKe_bElZ4qPk-cRwirc_c-v8EbLpZpq2-848DAqlZmeI9Ku8sg8C-pnRarvHrDC7RUXvsEhFzy3il5Lg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/quotes?ratingType=WORSE",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"quotes"
+							],
+							"query": [
+								{
+									"key": "ratingType",
+									"value": "WORSE"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

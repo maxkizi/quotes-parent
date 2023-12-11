@@ -37,7 +37,7 @@ services:
       retries: 5
 
   auth-service:
-    build: ./quotes-auth-service/
+    image: maxkizi/quotes-auth-service:0.0.1
     ports:
       - 9090:9090
     entrypoint: [ "java", "-jar", "opt/authservice.jar" ]
@@ -62,7 +62,7 @@ services:
       retries: 5
 
   core-service:
-    build: ./quotes-core/
+    image: maxkizi/quotes-core:0.0.1
     ports:
       - 8080:8080
     entrypoint: [ "java", "-jar", "opt/coreservice.jar" ]
