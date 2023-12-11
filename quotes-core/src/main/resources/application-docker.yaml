@@ -1,0 +1,22 @@
+server:
+  port: ${APPLICATION_PORT}
+
+spring:
+  datasource:
+    url: ${DATASOURCE_URL}
+    driverClassName: ${JDBC_DRIVER_CLASS_NAME}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
+  liquibase:
+    change-log: classpath:db/changelog.xml
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+jwt:
+  secretKey: ${JWT_SECRET}
+kafka:
+  bootstrap: ${KAFKA_BOOTSTRAP}
+  groupId: ${CONSUMER_GROUP_ID}
+  userInfoTopic: ${USER_INFO_TOPIC}

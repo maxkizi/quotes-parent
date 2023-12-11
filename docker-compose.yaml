@@ -5,6 +5,7 @@ services:
       - "2181:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
+    restart: always
   quotes_kafka:
     image: confluentinc/cp-kafka:latest
     depends_on:
@@ -19,3 +20,62 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: '1'
       KAFKA_MIN_INSYNC_REPLICAS: '1'
     restart: always
+
+  postgres:
+    image: postgres:latest
+    volumes:
+      - ./pg-init-script:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_MULTIPLE_DATABASES: quotes_core,quotes_auth
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGUSER: postgres
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+
+  auth-service:
+    build: ./quotes-auth-service/
+    ports:
+      - 9090:9090
+    entrypoint: [ "java", "-jar", "opt/authservice.jar" ]
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      APPLICATION_PORT: 9090
+      DATASOURCE_URL: jdbc:postgresql://postgres:5432/quotes_auth
+      JDBC_DRIVER_CLASS_NAME: org.postgresql.Driver
+      DATASOURCE_USERNAME: postgres
+      DATASOURCE_PASSWORD: postgres
+      JWT_EXPIRATION_IN_MINUTES: 100
+      JWT_SECRET: dbe86901da2c6496286f60b44f0035c4970588308b15e9b025c4c544f7c599fd
+      KAFKA_BOOTSTRAP: quotes_kafka:9092
+    depends_on:
+       postgres:
+          condition: service_healthy
+    restart: always
+    healthcheck:
+      test: "curl --fail --silent localhost:9090/actuator/health | grep UP || exit 1"
+      interval: 5s
+      timeout: 10s
+      retries: 5
+
+  core-service:
+    build: ./quotes-core/
+    ports:
+      - 8080:8080
+    entrypoint: [ "java", "-jar", "opt/coreservice.jar" ]
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      APPLICATION_PORT: 8080
+      DATASOURCE_URL: jdbc:postgresql://postgres:5432/quotes_core
+      JDBC_DRIVER_CLASS_NAME: org.postgresql.Driver
+      DATASOURCE_USERNAME: postgres
+      DATASOURCE_PASSWORD: postgres
+      JWT_SECRET: dbe86901da2c6496286f60b44f0035c4970588308b15e9b025c4c544f7c599fd
+      KAFKA_BOOTSTRAP: quotes_kafka:9092
+      CONSUMER_GROUP_ID: quote-core
+      USER_INFO_TOPIC: user
+    depends_on:
+      - auth-service
